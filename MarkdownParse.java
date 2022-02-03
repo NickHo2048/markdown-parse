@@ -13,7 +13,11 @@ public class MarkdownParse {
         while(currentIndex < markdown.length()) {
             int openParen = markdown.indexOf("(", currentIndex);
             int closeParen = markdown.indexOf(")", openParen);
-            toReturn.add(markdown.substring(openParen + 1, closeParen));
+            if(markdown.substring(openParen + 1, closeParen).contains(" ")){
+                currentIndex = closeParen + 1;
+                continue;
+            }
+            else toReturn.add(markdown.substring(openParen + 1, closeParen));
             currentIndex = closeParen + 1;
         }
         return toReturn;
@@ -27,8 +31,7 @@ public class MarkdownParse {
         System.out.println(links);
         }
         catch(Exception e){
-            System.out.println(e.toString());
-            return;
+            System.out.println(e.toString() + "\nPlease try");
         }
 	    
     }
